@@ -6,6 +6,7 @@ import { IMAGE_MANAGEMENT_BASE_URL } from "@consts/image-management-consts.js";
 import { IMAGE_PROCESSING_PREVIEW_BASE_URL } from "@consts/image-processing-preview-consts.js";
 import { ENV_CONST } from "@consts/envConst.js";
 import errorHandlerMiddleware from "@middlewares/errorHandlerMiddleware.js";
+import serverless from "serverless-http";
 
 const app = express();
 //cors policy
@@ -20,6 +21,12 @@ app.use(IMAGE_PROCESSING_PREVIEW_BASE_URL, imageProcessingPreviewRouter);
 // Error handling middleware should be the last one
 app.use(errorHandlerMiddleware);
 
-app.listen(ENV_CONST.PORT, () => {
-  console.log("server started on port", ENV_CONST.PORT);
-});
+// For local development
+if (ENV_CONST.NODE_ENV !== "production") {
+  app.listen(ENV_CONST.PORT, () => {
+    console.log("server started on port", ENV_CONST.PORT);
+  });
+}
+
+// For Netlify
+export const handler = serverless(app);

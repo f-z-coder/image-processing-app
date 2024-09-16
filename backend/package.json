@@ -6,7 +6,7 @@
   "type": "module",
   "scripts": {
     "start": "node ./dist/index.js",
-    "build": "tsc && tsc-alias && netlify-lambda build dist",
+    "build": "tsc && tsc-alias",
     "dev": "nodemon"
   },
   "author": "Faiz Shaikh",

@@ -9,6 +9,7 @@ type ImageContextType = {
   height: number | undefined;
   setWidth: (width: number) => void;
   setHeight: (height: number) => void;
+  resetImage: () => void;
 };
 
 export const ImageContext = createContext<ImageContextType | undefined>(
@@ -22,7 +23,9 @@ export const ImageProvider: FC<PropsWithChildren> = ({ children }) => {
   const [originalImage, setOriginalImage] = useState<string | undefined>(
     undefined,
   );
-
+  const resetImage = () => {
+    setImage(originalImage);
+  };
   return (
     <ImageContext.Provider
       value={{
@@ -34,6 +37,7 @@ export const ImageProvider: FC<PropsWithChildren> = ({ children }) => {
         height,
         setWidth,
         setHeight,
+        resetImage,
       }}
     >
       {children}

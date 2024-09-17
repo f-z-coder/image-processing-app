@@ -1,11 +1,15 @@
-import { useBrightness } from "@/hooks/image-attributes-hooks/use-brightness";
-import { useContrast } from "@/hooks/image-attributes-hooks/use-contrast";
-import { useCrop } from "@/hooks/image-attributes-hooks/use-crop";
-import { useFormat } from "@/hooks/image-attributes-hooks/use-format";
-import { useRotation } from "@/hooks/image-attributes-hooks/use-rotation";
-import { useSaturation } from "@/hooks/image-attributes-hooks/use-saturation";
+import {
+  useBrightness,
+  useContrast,
+  useCrop,
+  useFormat,
+  useImage,
+  useRotation,
+  useSaturation,
+} from "@/hooks/image-attributes-hooks";
 
 export const useGetReset = () => {
+  const { resetImage } = useImage();
   const { resetBrightness } = useBrightness();
   const { resetContrast } = useContrast();
   const { resetSaturation } = useSaturation();
@@ -14,6 +18,7 @@ export const useGetReset = () => {
   const { resetFormat } = useFormat();
 
   const reset = () => {
+    resetImage();
     resetBrightness();
     resetContrast();
     resetSaturation();

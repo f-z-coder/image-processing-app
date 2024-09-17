@@ -10,6 +10,8 @@ type CropContextType = {
   isCropped: boolean;
   setIsCropped: (isCropped: boolean) => void;
   resetCrop: () => void;
+  isCropProcessing: boolean;
+  setIsCropProcessing: (isCropProcessing: boolean) => void;
 };
 
 export const CropContext = createContext<CropContextType | undefined>(
@@ -27,6 +29,7 @@ export const CropProvider: FC<PropsWithChildren> = ({ children }) => {
   const [crop, setCrop] = useState<Crop>(defaultCrop);
   const [isCropped, setIsCropped] = useState(false);
   const [isCropping, setIsCropping] = useState(false);
+  const [isCropProcessing, setIsCropProcessing] = useState(false);
   const resetCrop = () => {
     setCrop(defaultCrop);
     setIsCropped(false);
@@ -44,6 +47,8 @@ export const CropProvider: FC<PropsWithChildren> = ({ children }) => {
         isCropping,
         setIsCropping,
         resetCrop,
+        isCropProcessing,
+        setIsCropProcessing,
       }}
     >
       {children}

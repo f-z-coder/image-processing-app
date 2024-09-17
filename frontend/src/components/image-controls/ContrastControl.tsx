@@ -1,10 +1,11 @@
 import { useImageProcessing } from "@/hooks/useImageProcessing";
 import { BaseControl } from "./BaseControl";
-import { useContrast, useImage } from "@/hooks/image-attributes-hooks";
+import { useContrast } from "@/hooks/image-attributes-hooks";
+import { useIsControlDisabled } from "@/hooks/use-is-control-disabled";
 
 export const ContrastControl: React.FC = () => {
   const { contrast, setContrast } = useContrast();
-  const { image } = useImage();
+  const isControlDisabled = useIsControlDisabled();
 
   useImageProcessing("contrast", contrast);
 
@@ -15,7 +16,7 @@ export const ContrastControl: React.FC = () => {
       onChange={setContrast}
       min={0}
       max={200}
-      disabled={!image}
+      disabled={isControlDisabled}
     />
   );
 };

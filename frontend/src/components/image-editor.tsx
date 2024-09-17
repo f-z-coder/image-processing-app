@@ -13,11 +13,11 @@ export const ImageEditor: React.FC = () => {
     <div className="flex flex-col justify-center items-center w-full max-w-screen-md h-dvh mx-auto p-8">
       <Card className="w-full h-full flex flex-col">
         <CardContent className="w-full h-full flex flex-col  gap-4 p-6 flex-grow">
-          <div className="flex justify-center items-center min-h-0">
+          <div className="flex justify-center items-center min-h-0 flex-grow">
             <ImageDisplay />
           </div>
           <ImageUploader />
-          <DisableControls className="flex flex-col gap-4 flex-grow">
+          <DisableControls className="flex flex-col gap-4">
             <ProcessingModeToggle />
             <ImageCropper />
             <ImageConverter />

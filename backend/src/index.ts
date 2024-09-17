@@ -17,6 +17,14 @@ app.use(express.json());
 app.use(IMAGE_MANAGEMENT_BASE_URL, imageManagementRouter);
 app.use(IMAGE_PROCESSING_PREVIEW_BASE_URL, imageProcessingPreviewRouter);
 
+// Wake-up route
+// This route is used to keep the server active on platforms like Render,
+// which may put the server to sleep after periods of inactivity.
+// The frontend calls this route on initial load to ensure the server is awake.
+app.get("/api/v1/wakeup", (req, res) => {
+  res.status(200).json({ message: "Server is awake" });
+});
+
 // Error handling middleware should be the last one
 app.use(errorHandlerMiddleware);
 

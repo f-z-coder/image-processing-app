@@ -19,13 +19,21 @@ export const ImageCropper: React.FC = () => {
   const { processingMode } = useProcessingMode();
   const imageAttributes = useGetImageAttributes();
   const { format, isConverted } = useFormat();
-  const { crop, setIsCropped, isCropping, setIsCropping } = useCrop();
-  const { setImage, width, height } = useImage();
+  const {
+    crop,
+    setIsCropped,
+    isCropping,
+    setIsCropping,
+    isCropProcessing,
+    setIsCropProcessing,
+  } = useCrop();
+  const { setImage, width, height, originalImage } = useImage();
 
   const handleApplyCrop = async () => {
     if (!filePath || !crop) return;
 
     try {
+      setIsCropProcessing(true);
       if (processingMode === "single") {
         const imageUrl = await processSingleImageOperation(
           filePath,
@@ -47,11 +55,15 @@ export const ImageCropper: React.FC = () => {
       console.error("Cropping failed:", error);
     } finally {
       setIsCropping(false);
+      setIsCropProcessing(false);
     }
   };
 
   const handleCrop = () => {
     setIsCropping(true);
+    if (originalImage) {
+      setImage(originalImage);
+    }
   };
 
   const handleCancelCrop = () => {
@@ -64,7 +76,9 @@ export const ImageCropper: React.FC = () => {
         <Button onClick={handleCrop}>Crop Image</Button>
       ) : (
         <>
-          <Button onClick={handleApplyCrop}>Apply Crop</Button>
+          <Button onClick={handleApplyCrop}>
+            {isCropProcessing ? "Cropping..." : "Apply Crop"}
+          </Button>
           <Button onClick={handleCancelCrop}>Cancel Crop</Button>
         </>
       )}

@@ -1,4 +1,4 @@
-import { FC, useEffect, useRef } from "react";
+import { FC } from "react";
 import demoImage from "@/assets//demo-image.png";
 import ReactCrop from "react-image-crop";
 import { useCrop, useImage } from "@/hooks/image-attributes-hooks";
@@ -6,14 +6,6 @@ import { useCrop, useImage } from "@/hooks/image-attributes-hooks";
 export const ImageDisplay: FC = () => {
   const { image, setHeight, setWidth } = useImage();
   const { isCropping, crop, setCrop } = useCrop();
-  const imageRef = useRef<HTMLImageElement>(null);
-
-  useEffect(() => {
-    if (imageRef.current) {
-      setWidth(imageRef.current.width);
-      setHeight(imageRef.current.height);
-    }
-  }, [isCropping, setHeight, setWidth]);
 
   const imageClass = "object-contain h-full";
 
@@ -33,7 +25,10 @@ export const ImageDisplay: FC = () => {
         src={image}
         alt="Crop preview"
         className={imageClass}
-        ref={imageRef}
+        onLoad={(e) => {
+          setWidth(e.currentTarget.width);
+          setHeight(e.currentTarget.height);
+        }}
       />
     </ReactCrop>
   );

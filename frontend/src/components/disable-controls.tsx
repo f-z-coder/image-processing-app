@@ -1,4 +1,4 @@
-import { useImage } from "@/hooks/image-attributes-hooks";
+import { useIsControlDisabled } from "@/hooks/use-is-control-disabled";
 import { FC, FieldsetHTMLAttributes, ReactNode } from "react";
 
 interface DisableControlsProps
@@ -10,9 +10,9 @@ export const DisableControls: FC<DisableControlsProps> = ({
   children,
   ...props
 }) => {
-  const { image } = useImage();
+  const isControlDisabled = useIsControlDisabled();
   return (
-    <fieldset disabled={!image} {...props}>
+    <fieldset disabled={isControlDisabled} {...props}>
       {children}
     </fieldset>
   );

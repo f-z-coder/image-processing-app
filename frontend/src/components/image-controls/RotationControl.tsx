@@ -1,11 +1,11 @@
 import { useImageProcessing } from "@/hooks/useImageProcessing";
 import { BaseControl } from "./BaseControl";
-import { useRotation, useImage } from "@/hooks/image-attributes-hooks";
+import { useRotation } from "@/hooks/image-attributes-hooks";
+import { useIsControlDisabled } from "@/hooks/use-is-control-disabled";
 
 export const RotationControl: React.FC = () => {
   const { rotation, setRotation } = useRotation();
-  const { image } = useImage();
-
+  const isControlDisabled = useIsControlDisabled();
   useImageProcessing("rotation", rotation);
 
   return (
@@ -15,7 +15,7 @@ export const RotationControl: React.FC = () => {
       onChange={setRotation}
       min={0}
       max={360}
-      disabled={!image}
+      disabled={isControlDisabled}
     />
   );
 };

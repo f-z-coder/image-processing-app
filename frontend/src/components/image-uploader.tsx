@@ -8,11 +8,10 @@ import {
 } from "@/hooks/image-attributes-hooks";
 
 export const ImageUploader: FC = () => {
-  const { image, setImage } = useImage();
+  const { image, setImage, setOriginalImage } = useImage();
   const { setFormat } = useFormat();
-  const { setFilePath } = useFilePath();
+  const { setFilePath, isUploading, setIsUploading } = useFilePath();
   const [error, setError] = useState<string | null>(null);
-  const [isUploading, setIsUploading] = useState(false);
 
   const handleFileUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
     setError(null);
@@ -29,6 +28,7 @@ export const ImageUploader: FC = () => {
         setFilePath(filePath);
         const imageUrl = URL.createObjectURL(file);
         setImage(imageUrl);
+        setOriginalImage(imageUrl);
         setFormat(file.type === "image/png" ? "png" : "jpeg");
       } catch (error) {
         console.error("Upload failed:", error);

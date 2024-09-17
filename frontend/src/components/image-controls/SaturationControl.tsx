@@ -1,10 +1,11 @@
 import { useImageProcessing } from "@/hooks/useImageProcessing";
 import { BaseControl } from "./BaseControl";
-import { useSaturation, useImage } from "@/hooks/image-attributes-hooks";
+import { useSaturation } from "@/hooks/image-attributes-hooks";
+import { useIsControlDisabled } from "@/hooks/use-is-control-disabled";
 
 export const SaturationControl: React.FC = () => {
   const { saturation, setSaturation } = useSaturation();
-  const { image } = useImage();
+  const isControlDisabled = useIsControlDisabled();
 
   useImageProcessing("saturation", saturation);
 
@@ -15,7 +16,7 @@ export const SaturationControl: React.FC = () => {
       onChange={setSaturation}
       min={0}
       max={200}
-      disabled={!image}
+      disabled={isControlDisabled}
     />
   );
 };

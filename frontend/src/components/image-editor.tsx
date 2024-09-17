@@ -10,7 +10,7 @@ import { DisableControls } from "@/components/disable-controls";
 
 export const ImageEditor: React.FC = () => {
   return (
-    <div className="flex flex-col justify-center items-center w-full max-w-screen-md h-dvh mx-auto p-8">
+    <div className="flex flex-col justify-center items-center w-full min-w-[350px] max-w-screen-md h-dvh mx-auto p-8">
       <Card className="w-full h-full flex flex-col">
         <CardContent className="w-full h-full flex flex-col  gap-4 p-6 flex-grow">
           <div className="flex justify-center items-center min-h-0 flex-grow">

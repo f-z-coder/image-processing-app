@@ -34,7 +34,7 @@ export const DownloadButtons: React.FC = () => {
   };
 
   return (
-    <div className="flex justify-between">
+    <div className="flex flex-col justify-center items-center gap-4 xs:flex-row xs:justify-between ">
       <Button onClick={() => handleDownload("jpeg")}>Download JPEG</Button>
       <Button onClick={() => handleDownload("png")}>Download PNG</Button>
     </div>

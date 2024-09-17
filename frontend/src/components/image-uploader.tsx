@@ -8,10 +8,11 @@ import {
 } from "@/hooks/image-attributes-hooks";
 
 export const ImageUploader: FC = () => {
-  const { setImage } = useImage();
+  const { image, setImage } = useImage();
   const { setFormat } = useFormat();
   const { setFilePath } = useFilePath();
   const [error, setError] = useState<string | null>(null);
+  const [isUploading, setIsUploading] = useState(false);
 
   const handleFileUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
     setError(null);
@@ -23,6 +24,7 @@ export const ImageUploader: FC = () => {
       }
 
       try {
+        setIsUploading(true);
         const filePath = await uploadImage(file);
         setFilePath(filePath);
         const imageUrl = URL.createObjectURL(file);
@@ -35,14 +37,23 @@ export const ImageUploader: FC = () => {
         } else {
           setError("Upload failed. Please try again.");
         }
+      } finally {
+        setIsUploading(false);
       }
     }
   };
 
   return (
     <>
-      <Button onClick={() => document.getElementById("fileInput")?.click()}>
-        Upload Image
+      <Button
+        disabled={isUploading}
+        onClick={() => document.getElementById("fileInput")?.click()}
+      >
+        {isUploading
+          ? "Uploading..."
+          : !image
+            ? "Upload Image"
+            : "Upload New Image"}
       </Button>
       <input
         id="fileInput"

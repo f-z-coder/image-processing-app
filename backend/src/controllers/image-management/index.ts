@@ -1,3 +1,3 @@
-export { uploadHandler } from "./upload-handler.js";
-export { downloadHandler } from "./download-handler.js";
-export { cleanupHandler } from "./cleanup-handler.js";
+export * from "./upload-handler.js";
+export * from "./download-handler.js";
+export * from "./cleanup-handler.js";

@@ -5,7 +5,7 @@ type ResponseBody = { error: string };
 type RequestBody = {};
 type RequestQueryParams = {};
 
-const errorHandlerMiddleware: ErrorRequestHandler<
+export const errorHandlerMiddleware: ErrorRequestHandler<
   RequestParams,
   ResponseBody,
   RequestBody,
@@ -16,4 +16,3 @@ const errorHandlerMiddleware: ErrorRequestHandler<
     res.status(500).json({ error: err.message });
   }
 };
-export default errorHandlerMiddleware;
